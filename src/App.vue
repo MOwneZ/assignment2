@@ -1,18 +1,16 @@
 <template>
   <div id="app">
-    <input type="text" placeholder="Enter first array here" @keypress.enter.prevent ref>
-    <br>
-    <input type="text" placeholder="Enter second array here" @keypress.enter.prevent ref>
+    <InputArrays></InputArrays>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import InputArrays from "./components/InputArrays";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    InputArrays
   }
 };
 </script>
@@ -24,6 +22,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #FFC0CB;
   margin-top: 60px;
 }
 </style>
