@@ -7,7 +7,7 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
-class Calculator {
+export class Calculator {
   constructor() {
     this.arrayLength = 0;
     this.correlation = 0;
@@ -41,49 +41,25 @@ class Calculator {
     return total;
   }
   calculateCorrelation(textArray1, textArray2) {
-    this.array1 = this.getConvertArray(textArray1.value);
-    this.array2 = this.getConvertArray(textArray2.value);
-    if (
-      this.array1.length === this.array2.length &&
-      (this.array1.length >= 5 && this.array2.length >= 5)
-    ) {
-      this.arrayLength = this.array1.length;
-      let array1Sum = this.getSum(this.array1);
-      let array2Sum = this.getSum(this.array2);
-      this.message1 = this.array1;
-      this.message2 = this.array2;
-      let x2 = this.getN2Sum(this.array1);
-      let y2 = this.getN2Sum(this.array2);
-      let xTimesY = this.getxTimesY(this.array1, this.array2);
-      let n1 = this.arrayLength * xTimesY;
-      let n2 = array1Sum * array2Sum;
-      let n3 = this.arrayLength * x2 - array1Sum * array1Sum;
-      let n4 = this.arrayLength * y2 - array2Sum * array2Sum;
-      let n5 = n1 - n2;
-      let n6 = n3 * n4;
-      let n7 = Math.sqrt(n6);
-      let n8 = n5 / n7;
-      let finalCorrelation = n8 * n8;
-      console.log(
-        array1Sum,
-        array2Sum,
-        x2,
-        xTimesY,
-        y2,
-        n1,
-        n2,
-        n3,
-        n4,
-        n5,
-        n6,
-        n7,
-        n8
-      );
-      this.correlation = finalCorrelation;
-    }
-    if ((this.array1.length || this.array2.length) < 5) {
-      this.errorText = "the arrays must be at least 5 numbers in size.";
-    }
+    console.log(textArray1, textArray2);
+    this.array1 = this.getConvertArray(textArray1);
+    this.array2 = this.getConvertArray(textArray2);
+    this.arrayLength = this.array1.length;
+    let array1Sum = this.getSum(this.array1);
+    let array2Sum = this.getSum(this.array2);
+    let x2 = this.getN2Sum(this.array1);
+    let y2 = this.getN2Sum(this.array2);
+    let xTimesY = this.getxTimesY(this.array1, this.array2);
+    let n1 = this.arrayLength * xTimesY;
+    let n2 = array1Sum * array2Sum;
+    let n3 = this.arrayLength * x2 - array1Sum * array1Sum;
+    let n4 = this.arrayLength * y2 - array2Sum * array2Sum;
+    let n5 = n1 - n2;
+    let n6 = n3 * n4;
+    let n7 = Math.sqrt(n6);
+    let n8 = n5 / n7;
+    let finalCorrelation = n8 * n8;
+    return finalCorrelation;
   }
   clearAll() {
     this.$refs.textArray1.value = "";
