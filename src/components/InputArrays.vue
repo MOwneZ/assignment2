@@ -15,7 +15,9 @@
       ref="textArray2"
     >
     <br>
-    <button @click="getCorrelation()">Calculate!</button>
+    <button @click="getCalculation(1)">Calculate Correlation!</button>
+    <button @click="getCalculation(2)">Calculate Regression!</button>
+    <br>
     <button @click="clearAll()">clear all</button>
   </div>
 </template>
@@ -27,10 +29,10 @@ export default {
     setArrays: Function
   },
   methods: {
-    getCorrelation() {
+    getCalculation(number) {
       let textArray1 = this.$refs.textArray1.value;
       let textArray2 = this.$refs.textArray2.value;
-      this.setArrays(textArray1, textArray2);
+      this.setArrays(textArray1, textArray2, number);
     },
     clearAll() {
       this.$refs.textArray1.value = "";

@@ -40,8 +40,49 @@ export class Calculator {
     }
     return total;
   }
+  getArraySquared(array) {
+    let arrayLength = array.length;
+    let total = 0;
+    for (var i = 0; i < arrayLength; i++) {
+      total += array[i] * array[i];
+    }
+    return total;
+  }
+  getMean(array) {
+    let arrayLength = array.length;
+    let sum = this.getSum(array);
+    let mean = sum / arrayLength;
+    return mean;
+  }
+  calculateStdDeviation(array) {
+    let arrayLength = array.length;
+    let sum = this.getSum(array);
+    let mean = sum / array.length;
+    let xMinusMean = 0;
+    let xMinusMeanSq = 0;
+    for (var x = 0; x < arrayLength; x++) {
+      xMinusMean = array[x] - mean;
+      xMinusMeanSq += xMinusMean * xMinusMean;
+    }
+    let stdDev = Math.sqrt(xMinusMeanSq / (arrayLength - 1));
+    return stdDev;
+  }
+  calculateRegression(textArray1, textArray2) {
+    this.array1 = this.getConvertArray(textArray1);
+    this.array2 = this.getConvertArray(textArray2);
+    this.arrayLength = this.array1.length;
+    let xMean = this.getMean(this.array1);
+    let yMean = this.getMean(this.array2);
+    let xTimesY = this.getxTimesY(this.array1, this.array2);
+    let xSquared = this.getArraySquared(this.array1);
+    console.log(xMean, yMean, xTimesY, xSquared);
+    let sigArray1 = xTimesY - this.arrayLength * xMean * yMean;
+    let sigArray2 = xSquared - this.arrayLength * xMean * xMean;
+    let beta1 = sigArray1 / sigArray2;
+    let beta2 = yMean - beta1 * xMean;
+    return "Beta 1: " + beta1 + " Beta 0: " + beta2;
+  }
   calculateCorrelation(textArray1, textArray2) {
-    console.log(textArray1, textArray2);
     this.array1 = this.getConvertArray(textArray1);
     this.array2 = this.getConvertArray(textArray2);
     this.arrayLength = this.array1.length;
@@ -59,16 +100,6 @@ export class Calculator {
     let n7 = Math.sqrt(n6);
     let n8 = n5 / n7;
     let finalCorrelation = n8 * n8;
-    return finalCorrelation;
-  }
-  clearAll() {
-    this.$refs.textArray1.value = "";
-    this.$refs.textArray2.value = "";
-    this.message1 = "";
-    this.message2 = "";
-    this.arrayLength = 0;
-    this.array1Sum = 0;
-    this.array2Sum = 0;
-    this.errorText = "";
+    return "Correlation: " + finalCorrelation;
   }
 }

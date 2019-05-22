@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <InputArrays :setArrays="setArrays"></InputArrays>
-    <h1>Correlation: {{ correlation }}</h1>
+    <h1>{{ result }}</h1>
   </div>
 </template>
 <script>
@@ -16,21 +16,32 @@ export default {
     return {
       array1: [],
       array2: [],
-      correlation: 0
+      result: ""
     };
   },
   methods: {
-    sendCalculator() {
+    getCorrelation() {
+      console.log("correlation");
       let theCalculator = new Calculator();
-      this.correlation = theCalculator.calculateCorrelation(
+      this.result = theCalculator.calculateCorrelation(
         this.array1,
         this.array2
       );
     },
-    setArrays(array1, array2) {
+    getRegression() {
+      console.log("regression");
+      let theCalculator = new Calculator();
+      this.result = theCalculator.calculateRegression(this.array1, this.array2);
+    },
+    setArrays(array1, array2, number) {
       this.array1 = array1;
       this.array2 = array2;
-      this.sendCalculator();
+      if (number === 1) {
+        this.getCorrelation();
+      }
+      if (number === 2) {
+        this.getRegression();
+      }
     }
   }
 };
