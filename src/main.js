@@ -1,5 +1,11 @@
 import Vue from "vue";
 import App from "./App.vue";
+import BootstrapVue from "bootstrap-vue";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
+Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false;
 
@@ -19,7 +25,7 @@ export class Calculator {
     return array.reduce(reducer);
   }
   getConvertArray(text) {
-    return text.split(" ").map(Number);
+    return text.split("\n").map(Number);
   }
   getN2Sum(array) {
     let arrayLength = array.length;
@@ -75,11 +81,11 @@ export class Calculator {
     let yMean = this.getMean(this.array2);
     let xTimesY = this.getxTimesY(this.array1, this.array2);
     let xSquared = this.getArraySquared(this.array1);
-    console.log(xMean, yMean, xTimesY, xSquared);
     let sigArray1 = xTimesY - this.arrayLength * xMean * yMean;
     let sigArray2 = xSquared - this.arrayLength * xMean * xMean;
     let beta1 = sigArray1 / sigArray2;
     let beta2 = yMean - beta1 * xMean;
+    console.log(beta1, beta2);
     return "Beta 1: " + beta1 + " Beta 0: " + beta2;
   }
   calculateCorrelation(textArray1, textArray2) {
@@ -100,6 +106,7 @@ export class Calculator {
     let n7 = Math.sqrt(n6);
     let n8 = n5 / n7;
     let finalCorrelation = n8 * n8;
+    console.log(finalCorrelation);
     return "Correlation: " + finalCorrelation;
   }
 }

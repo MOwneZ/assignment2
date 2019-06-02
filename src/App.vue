@@ -1,12 +1,16 @@
 <template>
   <div id="app">
     <InputArrays :setArrays="setArrays"></InputArrays>
-    <h1>{{ result }}</h1>
+    <br>
+    <h1 class="alert alert-success">{{ result }}</h1>
   </div>
 </template>
 <script>
 import InputArrays from "./components/InputArrays";
 import { Calculator } from "./main.js";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
 export default {
   name: "App",
   components: {
