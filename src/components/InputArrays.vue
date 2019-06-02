@@ -1,19 +1,10 @@
 <template>
   <div class="hello">
-    <h1>Enter your array, with each number separated by a comma.</h1>
-    <input
-      type="text"
-      placeholder="Enter first array here"
-      @keypress.enter.prevent
-      ref="textArray1"
-    >
-    <br>
-    <input
-      type="text"
-      placeholder="Enter second array here"
-      @keypress.enter.prevent
-      ref="textArray2"
-    >
+    <h1>Submit your array documents!</h1>
+<h2>Upload your two documents.</h2>
+    <input type="file" @change="onFileChange">
+    <h3>{{ array1 }}</h3>
+    <h3>{{ array2 }}</h3>
     <br>
     <button @click="getCalculation(1)">Calculate Correlation!</button>
     <button @click="getCalculation(2)">Calculate Regression!</button>
@@ -28,15 +19,36 @@ export default {
   props: {
     setArrays: Function
   },
+  data() {
+    return {
+      array1: '',
+      array2: ''
+    };
+  },
   methods: {
     getCalculation(number) {
-      let textArray1 = this.$refs.textArray1.value;
-      let textArray2 = this.$refs.textArray2.value;
+      let textArray1 = this.array1;
+      let textArray2 = this.array2;
       this.setArrays(textArray1, textArray2, number);
     },
-    clearAll() {
-      this.$refs.textArray1.value = "";
-      this.$refs.textArray2.value = "";
+    onFileChange(e) {
+      let files = e.target.files
+      if (files.length) {
+        this.loadNumbers(files[0])
+      }
+    },
+    loadNumbers(file) {
+      let reader = new FileReader()
+      reader.onload = (e) => {
+        if (this.array1 === '') {
+          this.array1 = e.target.result
+        }
+        else {
+          this.array2 = e.target.result
+        }
+
+      }
+      reader.readAsText(file)
     }
   }
 };

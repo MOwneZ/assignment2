@@ -19,7 +19,7 @@ export class Calculator {
     return array.reduce(reducer);
   }
   getConvertArray(text) {
-    return text.split(" ").map(Number);
+    return text.split("\n").map(Number);
   }
   getN2Sum(array) {
     let arrayLength = array.length;
@@ -83,8 +83,10 @@ export class Calculator {
     return "Beta 1: " + beta1 + " Beta 0: " + beta2;
   }
   calculateCorrelation(textArray1, textArray2) {
+    console.log(textArray1, textArray2);
     this.array1 = this.getConvertArray(textArray1);
     this.array2 = this.getConvertArray(textArray2);
+    console.log(this.array1, this.array2);
     this.arrayLength = this.array1.length;
     let array1Sum = this.getSum(this.array1);
     let array2Sum = this.getSum(this.array2);
